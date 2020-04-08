@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Homepage</title>
+<title>Settings</title>
 </head>
 <body>
-<h1>UNDER CONSTRUCTION</h1>
+<h1>This is the settings page</h1>
+<jsp:include page="menu.jsp"></jsp:include>
 </body>
 </html>

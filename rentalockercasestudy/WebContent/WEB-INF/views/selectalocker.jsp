@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Homepage</title>
+<title>RentALocker</title>
 </head>
 <body>
-<h1>UNDER CONSTRUCTION</h1>
+<h1>This is the locker selection page</h1>
+<jsp:include page="menu.jsp"></jsp:include>
 </body>
 </html>

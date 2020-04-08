@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Homepage</title>
+<title>Login</title>
 </head>
 <body>
-<h1>UNDER CONSTRUCTION</h1>
+<h1>This is the login page</h1>
+<jsp:include page="menu.jsp"></jsp:include>
+<h2>Please Login</h2>
 </body>
 </html>

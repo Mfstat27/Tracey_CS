@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Homepage</title>
+<title>Registration</title>
 </head>
 <body>
-<h1>UNDER CONSTRUCTION</h1>
+<h1>This is the registration page</h1>
+<jsp:include page="menu.jsp"></jsp:include>
 </body>
 </html>
