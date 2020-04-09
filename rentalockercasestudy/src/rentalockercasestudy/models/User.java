@@ -8,6 +8,7 @@ import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
 
+import com.stripe.Stripe;
 import com.stripe.model.PaymentMethod;
 
 @Entity
@@ -20,6 +21,7 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private PaymentMethod payment;
+	
 	
 	@ManyToOne
 	private Locker locker;

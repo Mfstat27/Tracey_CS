@@ -1,5 +1,9 @@
 package rentalockercasestudy.dao;
 
-public interface LockerDaoI {
+import rentalockercasestudy.models.User;
 
+public interface LockerDaoI {
+	
+	
+	
 }
