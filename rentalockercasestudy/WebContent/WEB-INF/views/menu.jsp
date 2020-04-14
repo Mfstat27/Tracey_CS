@@ -6,5 +6,7 @@
 <a href = "settings">Settings</a> 
 <a href = "profilepage">My Page</a> 
 <a href = "selectalocker">Rent A Locker Now</a> 
+<a href = "signout">Sign out</a> 
+<a href = "contactus">Contact Us</a> 
 
 </nav>

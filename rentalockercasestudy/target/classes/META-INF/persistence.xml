@@ -5,6 +5,7 @@
 		<class>rentalockercasestudy.models.Address</class>
 		<class>rentalockercasestudy.models.User</class>
 		<class>rentalockercasestudy.models.Locker</class>
+		<class>rentalockercasestudy.models.Payment</class>
 
 		<properties>
 		<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/RentaLockerCaseStudy"/>
