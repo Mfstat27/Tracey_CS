@@ -7,17 +7,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<title>ERROR</title>
+<title>About RentALocker</title>
 </head>
 <body>
 <div class="jumbotron text-center">
+  <h1>About Us</h1>
   <jsp:include page="menu.jsp"></jsp:include>
-	<h1>You were not logged in try again</h1>
-</div>
-<div>
-<jsp:include page="login.jsp"></jsp:include>
-</div>
 
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

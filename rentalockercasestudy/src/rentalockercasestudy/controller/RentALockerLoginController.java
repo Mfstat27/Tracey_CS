@@ -10,17 +10,14 @@ import org.springframework.web.servlet.ModelAndView;
 import rentalockercasestudy.models.User;
 
 @Controller
-@WebServlet(
-		name = "login",
-		urlPatterns = "/profilepage"
-		)
+
 
 public class RentALockerLoginController {
 
 	@RequestMapping("/login")
-	public ModelAndView loginHandler(@ModelAttribute User userLogin, @RequestParam("")String ) {
+	public ModelAndView loginHandler(@ModelAttribute User userLogin) {
 		ModelAndView mav = new ModelAndView("login");
-		
+		mav.addObject(userLogin);
 		return mav;
 	}
 

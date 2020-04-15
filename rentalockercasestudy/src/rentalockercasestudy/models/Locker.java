@@ -19,7 +19,7 @@ UUID lockerKey;
 private int lockerNumber;
 
 
-private Address lockerLocation;
+private LockerAddress lockerLocation;
 
 	public Locker() {
 		super();

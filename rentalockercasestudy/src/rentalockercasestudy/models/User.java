@@ -2,47 +2,47 @@ package rentalockercasestudy.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
 
 import com.stripe.Stripe;
 import com.stripe.model.PaymentMethod;
-
+import java.util.ArrayList;
 @Entity
 @Table
 public class User {
-	@NonNull
 	@Id
+	private int customerId;
+	@NonNull
+	
 	private String userNameEmail;
 	private String Password;
 	private String firstName;
 	private String lastName;
-	
-	@ManyToOne
 	private Payment payment;
 	
+	@OneToMany
+	private ArrayList<Payment> payments;
+	
 	@ManyToOne
-	private Locker locker;
+	@JoinColumn(name="LockerID")
+	private Locker lockerNumber;
 
 	public User() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 	
-	
-	
-	public User(String userNameEmail, String password, String firstName, String lastName, 
-			Locker locker) {
+	public User(String userNameEmail, String password, String firstName, String lastName) {
 		this.userNameEmail = userNameEmail;
 		Password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.locker = locker;
 	}
-
-
 
 	public String getUserNameEmail() {
 		return userNameEmail;
@@ -84,53 +84,86 @@ public class User {
 		this.payment = payment;
 	}
 
-	public Locker getLocker() {
-		return locker;
+	public Locker getLockerNumber() {
+		return lockerNumber;
 	}
 
-	public void setLocker(Locker locker) {
-		this.locker = locker;
+	public void setLocker(Locker lockerNumber) {
+		this.lockerNumber = lockerNumber;
+	}
+
+	public ArrayList<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(ArrayList<Payment> payments) {
+		this.payments = payments;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		User other = (User) obj;
 		if (Password == null) {
-			if (other.Password != null)
+			if (other.Password != null) {
 				return false;
-		} else if (!Password.equals(other.Password))
+			}
+		} else if (!Password.equals(other.Password)) {
 			return false;
+		}
+		if (customerId != other.customerId) {
+			return false;
+		}
 		if (firstName == null) {
-			if (other.firstName != null)
+			if (other.firstName != null) {
 				return false;
-		} else if (!firstName.equals(other.firstName))
+			}
+		} else if (!firstName.equals(other.firstName)) {
 			return false;
+		}
 		if (lastName == null) {
-			if (other.lastName != null)
+			if (other.lastName != null) {
 				return false;
-		} else if (!lastName.equals(other.lastName))
+			}
+		} else if (!lastName.equals(other.lastName)) {
 			return false;
-		if (locker == null) {
-			if (other.locker != null)
+		}
+		if (lockerNumber == null) {
+			if (other.lockerNumber != null) {
 				return false;
-		} else if (!locker.equals(other.locker))
+			}
+		} else if (!lockerNumber.equals(other.lockerNumber)) {
 			return false;
+		}
 		if (payment == null) {
-			if (other.payment != null)
+			if (other.payment != null) {
 				return false;
-		} else if (!payment.equals(other.payment))
+			}
+		} else if (!payment.equals(other.payment)) {
 			return false;
+		}
+		if (payments == null) {
+			if (other.payments != null) {
+				return false;
+			}
+		} else if (!payments.equals(other.payments)) {
+			return false;
+		}
 		if (userNameEmail == null) {
-			if (other.userNameEmail != null)
+			if (other.userNameEmail != null) {
 				return false;
-		} else if (!userNameEmail.equals(other.userNameEmail))
+			}
+		} else if (!userNameEmail.equals(other.userNameEmail)) {
 			return false;
+		}
 		return true;
 	}
 
@@ -138,12 +171,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [userNameEmail=" + userNameEmail + ", Password=" + Password + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", payment=" + payment + ", locker=" + locker + "]";
+		return "User [userNameEmail=" + userNameEmail + ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
-
-
-	
-	
 
 }

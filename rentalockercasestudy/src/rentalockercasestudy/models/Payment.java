@@ -1,13 +1,17 @@
 package rentalockercasestudy.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table
 public class Payment {
 	@Id
+	@GeneratedValue(generator="InvSeq")
+    @SequenceGenerator(name="InvSeq",sequenceName="INV_SEQ", allocationSize=5)
 	private int pId;
 	private long pNum;
 	private int expDate;
@@ -17,7 +21,6 @@ public class Payment {
 	
 	public Payment() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public Payment(long pNum, int expDate, int sId, String nameOnCard, String paymentName) {
 		this.pNum = pNum;

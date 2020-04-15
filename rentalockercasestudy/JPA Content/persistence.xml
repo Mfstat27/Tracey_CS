@@ -3,7 +3,7 @@
 	<persistence-unit name="rentalockercasestudy">
 		<class>rentalockercasestudy.models.Locker</class>
 		<class>rentalockercasestudy.models.User</class>
-		<class>rentalockercasestudy.models.Address</class>
+		<class>rentalockercasestudy.models.LockerAddress</class>
 	<properties>
 		<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/RentaLockerCaseStudy"/>
 		<property name="javax.persistence.jdbc.user" value="root"/>
