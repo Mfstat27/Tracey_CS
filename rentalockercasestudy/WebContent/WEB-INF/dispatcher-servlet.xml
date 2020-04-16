@@ -15,7 +15,7 @@
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 	<property name="viewClass" value= "org.springframework.web.servlet.view.JstlView"></property>
 	<property name="prefix" value="/WEB-INF/views/" ></property>
-	<property name="suffix" value=".html"></property>
+	<property name="suffix" value=".jsp"></property>
 </bean>
 <!-- addition: map resources folder for css, js, media etc.-->
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>

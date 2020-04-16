@@ -19,18 +19,18 @@ public class CustomerRental {
     @SequenceGenerator(name="InvSeq",sequenceName="INV_SEQ", allocationSize=5)
 	private int rentalNumber;
 	
-	@Column()
+	
 	@ManyToOne
 	@JoinColumn(name = "LockerID")
 	private Locker lockernumber;
 	@ManyToOne
 	@JoinColumn(name="CustomerID")
 	private User customer;
-	private Date rentalDate;
+	private String rentalDate;
 	public CustomerRental() {
 		super();
 	}
-	public CustomerRental(User customer, Date rentalDate) {
+	public CustomerRental(User customer, Locker lockernumber, String rentalDate) {
 		super();
 		this.customer = customer;
 		this.rentalDate = rentalDate;
@@ -47,10 +47,10 @@ public class CustomerRental {
 	public void setCustomer(User customer) {
 		this.customer = customer;
 	}
-	public Date getRentalDate() {
+	public String getRentalDate() {
 		return rentalDate;
 	}
-	public void setRentalDate(Date rentalDate) {
+	public void setRentalDate(String rentalDate) {
 		this.rentalDate = rentalDate;
 	}
 	

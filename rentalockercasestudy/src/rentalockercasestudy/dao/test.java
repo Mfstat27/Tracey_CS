@@ -1,9 +1,5 @@
 package rentalockercasestudy.dao;
 
+public abstract class test {
 
-
-public interface LockerDaoI {
-	
-
-	
 }

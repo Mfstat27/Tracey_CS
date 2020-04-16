@@ -3,6 +3,7 @@ package rentalockercasestudy.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,15 +20,19 @@ public class Payment {
 	private String nameOnCard;
 	private String paymentName;
 	
+	@ManyToOne
+	private User user;
+	
 	public Payment() {
 		super();
 	}
-	public Payment(long pNum, int expDate, int sId, String nameOnCard, String paymentName) {
+	public Payment(long pNum, int expDate, int sId, String nameOnCard, String paymentName,User user) {
 		this.pNum = pNum;
 		this.expDate = expDate;
 		this.sId = sId;
 		this.nameOnCard = nameOnCard;
 		this.paymentName = paymentName;
+		this.user = user;
 	}
 	
 	public int getpId() {

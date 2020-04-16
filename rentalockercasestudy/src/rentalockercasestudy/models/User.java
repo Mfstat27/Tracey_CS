@@ -24,14 +24,14 @@ public class User {
 	private String Password;
 	private String firstName;
 	private String lastName;
-	private Payment payment;
+//	private Payment payment;
 	
-	@OneToMany
-	private ArrayList<Payment> payments;
+//	@OneToMany
+//	private ArrayList<Payment> payments;
 	
-	@ManyToOne
-	@JoinColumn(name="LockerID")
-	private Locker lockerNumber;
+//	@ManyToOne
+//	@JoinColumn(name="LockerID")
+//	private Locker lockerNumber;
 
 	public User() {
 		super();
@@ -76,29 +76,29 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public Payment getPayment() {
-		return payment;
-	}
+//	public Payment getPayment() {
+//		return payment;
+//	}
+//
+//	public void setPayment(Payment payment) {
+//		this.payment = payment;
+//	}
+//
+//	public Locker getLockerNumber() {
+//		return lockerNumber;
+//	}
+//
+//	public void setLocker(Locker lockerNumber) {
+//		this.lockerNumber = lockerNumber;
+//	}
 
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
-
-	public Locker getLockerNumber() {
-		return lockerNumber;
-	}
-
-	public void setLocker(Locker lockerNumber) {
-		this.lockerNumber = lockerNumber;
-	}
-
-	public ArrayList<Payment> getPayments() {
-		return payments;
-	}
-
-	public void setPayments(ArrayList<Payment> payments) {
-		this.payments = payments;
-	}
+//	public ArrayList<Payment> getPayments() {
+//		return payments;
+//	}
+//
+//	public void setPayments(ArrayList<Payment> payments) {
+//		this.payments = payments;
+//	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -136,27 +136,27 @@ public class User {
 		} else if (!lastName.equals(other.lastName)) {
 			return false;
 		}
-		if (lockerNumber == null) {
-			if (other.lockerNumber != null) {
-				return false;
-			}
-		} else if (!lockerNumber.equals(other.lockerNumber)) {
-			return false;
-		}
-		if (payment == null) {
-			if (other.payment != null) {
-				return false;
-			}
-		} else if (!payment.equals(other.payment)) {
-			return false;
-		}
-		if (payments == null) {
-			if (other.payments != null) {
-				return false;
-			}
-		} else if (!payments.equals(other.payments)) {
-			return false;
-		}
+//		if (lockerNumber == null) {
+//			if (other.lockerNumber != null) {
+//				return false;
+//			}
+//		} else if (!lockerNumber.equals(other.lockerNumber)) {
+//			return false;
+//		}
+//		if (payment == null) {
+//			if (other.payment != null) {
+//				return false;
+//			}
+//		} else if (!payment.equals(other.payment)) {
+//			return false;
+//		}
+//		if (payments == null) {
+//			if (other.payments != null) {
+//				return false;
+//			}
+//		} else if (!payments.equals(other.payments)) {
+//			return false;
+//		}
 		if (userNameEmail == null) {
 			if (other.userNameEmail != null) {
 				return false;

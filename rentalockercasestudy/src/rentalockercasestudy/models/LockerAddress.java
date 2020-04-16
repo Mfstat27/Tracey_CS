@@ -4,20 +4,23 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+import java.util.ArrayList;
 @Entity
 @Table(name = "Locations")
 public class LockerAddress {
 	
 
 	@Id
-	private int lockerNumber;
+	private int addressId;
+	
+//	@OneToMany
+//	private ArrayList<Locker> lockers;
 	
 	private String fullAddress;
 	
 	
-	public LockerAddress(int lockerNumber, String fullAddress) {
-		this.lockerNumber = lockerNumber;
+	public LockerAddress(int addressId, String fullAddress) {
+		this.addressId = addressId;
 		this.fullAddress = fullAddress;
 	}
 
@@ -27,13 +30,13 @@ public class LockerAddress {
 	}
 
 
-	public int getLockerNumber() {
-		return lockerNumber;
+	public int getAd() {
+		return addressId;
 	}
 
 
-	public void setLockerNumber(int lockerNumber) {
-		this.lockerNumber = lockerNumber;
+	public void setLockerNumber(int addressId) {
+		this.addressId = addressId;
 	}
 
 
@@ -65,7 +68,7 @@ public class LockerAddress {
 		} else if (!fullAddress.equals(other.fullAddress)) {
 			return false;
 		}
-		if (lockerNumber != other.lockerNumber) {
+		if (addressId != other.addressId) {
 			return false;
 		}
 		return true;
@@ -74,7 +77,7 @@ public class LockerAddress {
 
 	@Override
 	public String toString() {
-		return "LockerAddress [lockerNumber=" + lockerNumber + ", fullAddress=" + fullAddress + "]";
+		return "LockerAddress [AddressId=" + addressId + ", fullAddress=" + fullAddress + "]";
 	}
 	
 	

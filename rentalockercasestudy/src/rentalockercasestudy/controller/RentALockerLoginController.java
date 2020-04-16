@@ -10,14 +10,13 @@ import org.springframework.web.servlet.ModelAndView;
 import rentalockercasestudy.models.User;
 
 @Controller
-
-
 public class RentALockerLoginController {
 
 	@RequestMapping("/login")
-	public ModelAndView loginHandler(@ModelAttribute User userLogin) {
+	public ModelAndView loginHandler() {
 		ModelAndView mav = new ModelAndView("login");
-		mav.addObject(userLogin);
+		//mav.addObject(userLogin);
+//		@ModelAttribute User userLogin
 		return mav;
 	}
 
