@@ -1,24 +1,23 @@
 package com.rentalockercasestudy.services;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+
 
 import com.rentalockercasestudy.dao.UserDao;
 import com.rentalockercasestudy.models.User;
 
 public class UserServices {
 //slane1
-	public int testAddUserService(User newUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public int testAddUserService(User newUser){
 		UserDao ud = new UserDao();
 		int result = ud.addUser(newUser);
 		System.out.println("User Added.");
 		return result;
 	}
 	
-	public boolean testFindUserBoolService(User inputUser) {
+	public boolean testFindUserBoolService(String userNameEmail) {
 		boolean userExists = false;
 		UserDao ud = new UserDao();
-		User foundUser = ud.findUser(inputUser);
+		User foundUser = ud.findUser(userNameEmail);
 		if(foundUser != null) {
 			userExists = true;
 			System.out.println("User found");
@@ -29,9 +28,9 @@ public class UserServices {
 		return userExists;
 	}
 	
-	public User testFindUserService(User inputUser) {
+	public User testFindUserService(String userNameEmail) {
 		UserDao ud = new UserDao();
-		User foundUser = ud.findUser(inputUser);
+		User foundUser = ud.findUser(userNameEmail);
 		if(foundUser != null) {
 			System.out.println("User found");
 		}else {
@@ -40,4 +39,21 @@ public class UserServices {
 		return foundUser;
 	}
 
+	public String testFindUserByEmailService(String userNameEmail) {
+		UserDao ud = new UserDao();
+		String foundUserEmail = ud.findUserByEmail(userNameEmail);
+		if(foundUserEmail != null) {
+			System.out.println("User found");
+		}else {
+			System.out.println("Sorry no user found with that information");
+		}
+		return foundUserEmail;
+	}
+	
+	public int testGetUserByUsernameAndPasswordservice(User userLogin) {
+		UserDao ud = new UserDao();
+		int result = ud.getUserByUsernameAndPassword(userLogin);
+		ud.printResult(result, userLogin);
+		return result;
+	}
 }

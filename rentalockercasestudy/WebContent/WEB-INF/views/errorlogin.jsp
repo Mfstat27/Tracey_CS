@@ -12,10 +12,10 @@
 <body>
 <div class="jumbotron text-center">
   <jsp:include page="menu.jsp"></jsp:include>
-	<h1>You were not logged in try again</h1>
+	<h1 style="padding-top:150px">You were not logged in try again</h1>
 </div>
 <div>
-<jsp:include page="login.jsp"></jsp:include>
+
 </div>
 
 

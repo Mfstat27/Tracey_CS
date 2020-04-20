@@ -11,7 +11,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
+import com.rentalockercasestudy.dao.UserDao;
 
 import java.util.ArrayList;
 @Entity
@@ -22,6 +24,7 @@ public class User {
     @SequenceGenerator(name="InvSeq",sequenceName="INV_SEQ", allocationSize=5)
 	private int customerId;
 	@NonNull
+	
 	
 	private String userNameEmail;
 	private String password;
@@ -40,12 +43,17 @@ public class User {
 		super();
 	}
 	
-	public User(String userNameEmail, String password, String firstName, String lastName) {
-		this.userNameEmail = userNameEmail;
-		this.password = password;
+	public User(String firstName, String lastName,String userNameEmail, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.userNameEmail = userNameEmail;
+		this.password = UserDao.encodePassword(password);
 	}
+
+//	public User(String userNameEmail, String password) {
+//		this.userNameEmail = userNameEmail;
+//		this.password = password;
+//	}
 
 	public String getUserNameEmail() {
 		return userNameEmail;
@@ -170,11 +178,14 @@ public class User {
 		return true;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "User [userNameEmail=" + userNameEmail + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+		return "User [customerId=" + customerId + ", userNameEmail=" + userNameEmail + ", password=" + password
+				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
+
+
+
+
 
 }

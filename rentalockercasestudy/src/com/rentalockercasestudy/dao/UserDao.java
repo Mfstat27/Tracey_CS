@@ -3,31 +3,24 @@ package com.rentalockercasestudy.dao;
 import javax.persistence.EntityManager;
 
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import com.rentalockercasestudy.models.User;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
 
-import javax.crypto.spec.*;
-import javax.crypto.*;
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class UserDao implements UserDaoI {
 	final static String persistenceUnitName = "com.rentalockercasestudy";
 	
 	
 	@Override
-	public int addUser(User newUser) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public int addUser(User newUser)  {
 		int result = 0;
-//		SecureRandom random = new SecureRandom();
-//		byte[] salt = new byte[16];
-//		random.nextBytes(salt);
-//		
-//		PBEKeySpec spec = new PBEKeySpec(newUser.getPassword().toCharArray(), salt, 65536, 128);
-//		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSha1");
-//		byte[] hash = factory.generateSecret(spec).getEncoded();
+		
 		
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
@@ -83,7 +76,7 @@ public class UserDao implements UserDaoI {
 	}
 
 	@Override
-	public User findUser(User inputUser) {
+	public User findUser(String userNameEmail) {
 		User foundUser = null;
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
@@ -92,7 +85,7 @@ public class UserDao implements UserDaoI {
 		em = emf.createEntityManager();	
 		
 		Query query = em.createQuery("select u from User u where u.userNameEmail like :givenUserEmail");
-		query.setParameter("givenUserEmail", inputUser.getUserNameEmail());
+		query.setParameter("givenUserEmail", userNameEmail);
 		foundUser = (User) query.getSingleResult();
 		
 		}catch(Exception e) {
@@ -103,6 +96,96 @@ public class UserDao implements UserDaoI {
 		}
 		return foundUser;
 	}		
+	@Override
+	public String findUserByEmail(String userNameEmail) {
+		String foundUserEmail = null;
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		try {
+		emf = Persistence.createEntityManagerFactory(persistenceUnitName);
+		em = emf.createEntityManager();	
+		
+		Query query = em.createQuery("select u.userNameEmail from User u where u.userNameEmail like :givenUserEmail");
+		query.setParameter("givenUserEmail", userNameEmail);
+		foundUserEmail = (String) query.getSingleResult();
+		
+		}catch(Exception e) {
+			foundUserEmail = null;
+		}finally {
+		em.close();
+		emf.close();
+		}
+		return foundUserEmail;
+	}		
+	
+	public int getUserByUsernameAndPassword(User userLogin) {
+		UserDao ud = new UserDao();
+		int result = 0;
+	
+		EntityManagerFactory emf= Persistence.createEntityManagerFactory(persistenceUnitName);
+		EntityManager em = emf.createEntityManager();
+		 try {
+		Query query = em.createQuery("select u from User u where u.userNameEmail = :givenUserName");
+		query.setParameter("givenUserName", userLogin.getUserNameEmail());
+		User ul = (User)query.getSingleResult();
+		System.out.println(ul);
+		boolean checkpword = ud.decodePassword(userLogin.getPassword(), ul.getPassword());
+		if(ul != null && checkpword) {
+			result = 1;
+		
+		}else if(ul != null && !checkpword) {
+			result = 2;
+			
+		} else {
+			result = 0;
+		}
+		//em.find(UserLogin.class, password);
+		 }catch(NoResultException n) {
+			
+		 }finally {
+	
+		em.close();
+		emf.close();
+		 }
+		return result;
+	}
+	
+	public static String encodePassword(String password) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(password);
+		return encodedPassword;
+	}
+	
+	public boolean decodePassword(String password, String encodedPassword) {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		boolean isPasswordMatch = passwordEncoder.matches(password, encodedPassword);
+		return isPasswordMatch;
+	}
+	
+	@Override
+	public  void printResult(int result) {
+		switch(result) {
+		case 0: System.out.println("User does not exist"); break;
+		case 1: System.out.println("User Exists"); break;
+		case 2:System.out.println("Invalid Password"); break;
+		case 3:System.out.println("Application Error: Try again!!!"); break;
+		default : System.out.println("ERROR 9999 !!!!");
+		}
+	}
+		@Override
+		public  void printResult(int result, User userLogin) {
+			try {
+			switch(result) {
+			case 0: System.out.println("User does not exist" + " " +userLogin.toString()); break;
+			case 1: System.out.println("User Exists" + " "+ userLogin.toString()); break;
+			case 2:System.out.println("Invalid Password"+ " "+ userLogin.toString()); break;
+			case 3:System.out.println("Application Error: Try again!!!" + " "+userLogin.toString()); break;
+			default : System.out.println("ERROR 9999 !!!!" + " "+ userLogin.toString());
+			}
+			}catch(NullPointerException n) {
+				System.out.println("ERROR 555: null");
+			}
+	}
 }
 
 

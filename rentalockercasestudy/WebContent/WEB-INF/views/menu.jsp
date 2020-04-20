@@ -16,7 +16,7 @@
         <a class="nav-link" href="selectalocker">Rent A Locker Now</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link"  href = "login">Login</a> 
+        <a class="nav-link"  href = "loginRM">Login</a> 
       </li>   
       <li class="nav-item">
         <a class="nav-link" href="register">Register</a> 
@@ -26,10 +26,7 @@
       </li>    
       <li class="nav-item">
         <a class="nav-link" href="profilepage">Profile Home</a>
-      </li>    
-      <li class="nav-item">
-        <a class="nav-link" href="selectalocker">Select-A-Locker</a>
-      </li>    
+      </li>       
       <li class="nav-item">
         <a class="nav-link" href="lockerlocations">Locker Locations</a>
       </li>    

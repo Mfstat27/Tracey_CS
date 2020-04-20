@@ -1,14 +1,16 @@
 package com.rentalockercasestudy.dao;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
+
 
 import com.rentalockercasestudy.models.User;
 
 public interface UserDaoI {
 
-	public int addUser(User newUser) throws NoSuchAlgorithmException, InvalidKeySpecException;
+	public int addUser(User newUser);
 	public User deleteUserAccount(User inputUser);
 	public int updateUser(User inputUser);
-	public User findUser(User inputUser);
+	public User findUser(String userNameEmail);
+	public String findUserByEmail(String userNameEmail);
+	public void printResult(int result);
+	public void printResult(int result, User userLogin);
 }
