@@ -50,10 +50,10 @@ public class UserServices {
 		return foundUserEmail;
 	}
 	
-	public int testGetUserByUsernameAndPasswordservice(User userLogin) {
-		UserDao ud = new UserDao();
-		int result = ud.getUserByUsernameAndPassword(userLogin);
-		ud.printResult(result, userLogin);
-		return result;
-	}
+//	public int testGetUserByUsernameAndPasswordService(User userLogin) {
+//		UserDao ud = new UserDao();
+//		int result = ud.getUserByUsernameAndPassword(userLogin);
+//		ud.printResult(result, userLogin);
+//		return result;
+//	}
 }

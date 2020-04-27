@@ -51,22 +51,27 @@ public class RentALockerLoginController {
 		}
 		UserDao ud = new UserDao();
 	
-		int result = 0;
+		User foundUser = null;
 		try {
-		 result = ud.getUserByUsernameAndPassword(u);
+		foundUser = ud.getUserByUsernameAndPassword(u);		
+		
 		}catch(Exception e) {
+			mav.setViewName("errorlogin");
 			
 		}
-		if(result == 0) {
-			mav.setViewName("errorlogin");
+		if(foundUser != null) {
+			mav.addObject("userSession",u);
 		}
-		if(result == 2) {
-			mav.setViewName("errorlogin");
-		}
-		if(result == 3) {
-			mav.setViewName("errorlogin");
-		}else
-		mav.addObject("userSession",u);
+//		if(result == 0) {
+//			mav.setViewName("errorlogin");
+//		}
+//		if(result == 2) {
+//			mav.setViewName("errorlogin");
+//		}
+//		if(result == 3) {
+//			mav.setViewName("errorlogin");
+//		}else
+		
 		return mav;
 }
 	

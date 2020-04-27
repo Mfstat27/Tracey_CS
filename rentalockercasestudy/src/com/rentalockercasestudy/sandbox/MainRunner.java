@@ -17,7 +17,7 @@ public class MainRunner {
 		LockerAddressServices las = new LockerAddressServices();
 		UserServices us = new UserServices();
 		
-		//	testConnection();
+			testConnection();
 		//System.out.println(las.testAddLockerAddress(new LockerAddress("LincolnCenter", "1972 Broadway New York, NY 10023")));
 		//System.out.println(las.testgetAllLockerAddresses());
 		//System.out.println(us.testAddUserService(new User("Tracey", "encode", "tencode@hotmail.com", "tencode1")));
@@ -34,7 +34,7 @@ public class MainRunner {
 //		System.out.println(us.testAddUserService(new User("Patricia","Sampson","psampson@live.com","psampson1")));
 //		System.out.println(us.testAddUserService(new User("Aden","Brady","aBrady@hotmail.com","abrady1")));
 //	
-		System.out.println(us.testGetUserByUsernameAndPasswordservice(new User("Shane","Lane","slane@gmail.com", "slane1")));
+		//System.out.println(us.testGetUserByUsernameAndPasswordService(new User("Shane","Lane","slane@gmail.com", "slane1")));
 	}
 	
 

@@ -39,6 +39,9 @@
       <li class="nav-item">
         <a class="nav-link"  href="faq">FAQ</a>
       </li>    
+          <li class="nav-item">
+        <a class="nav-link"  href="signout">Sign Out</a>
+      </li>    
     </ul>
 </nav>
 

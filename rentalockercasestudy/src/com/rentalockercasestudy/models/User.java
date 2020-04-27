@@ -19,13 +19,13 @@ import java.util.ArrayList;
 @Entity
 @Table
 public class User {
-	@Id
-	@GeneratedValue(generator="InvSeq")
-    @SequenceGenerator(name="InvSeq",sequenceName="INV_SEQ", allocationSize=5)
-	private int customerId;
+	
+//	@GeneratedValue(generator="InvSeq")
+//    @SequenceGenerator(name="InvSeq",sequenceName="INV_SEQ", allocationSize=5)
+//	private int customerId;
 	@NonNull
 	
-	
+	@Id
 	private String userNameEmail;
 	private String password;
 	private String firstName;
@@ -130,9 +130,9 @@ public class User {
 		} else if (!password.equals(other.password)) {
 			return false;
 		}
-		if (customerId != other.customerId) {
-			return false;
-		}
+//		if (customerId != other.customerId) {
+//			return false;
+//		}
 		if (firstName == null) {
 			if (other.firstName != null) {
 				return false;
@@ -180,7 +180,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [customerId=" + customerId + ", userNameEmail=" + userNameEmail + ", password=" + password
+		return "User [ userNameEmail=" + userNameEmail + ", password=" + password
 				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
 

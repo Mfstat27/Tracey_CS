@@ -84,9 +84,7 @@ input[type=submit] {
 <div>
 <%@ include file="menu.jsp"%>
 </div>
-      <div class="alert alert-danger" onsubmit="regform">
-    <strong>Danger!</strong> A User exists.
-  </div>
+
 <div class="container"  style="padding-top:300px">
   <h2>Register for a Rent-A-Locker Account</h2>
   <form action="registration" onsubmit="return validateForm()" method="post" name = "regform" >
@@ -100,7 +98,7 @@ input[type=submit] {
     </div>
     <div class="row">
       <div class="col">
-        <input type="email" class="form-control" id="email" value = "" placeholder="Enter username (your email)" name="userNameEmail" required><span class="red-text accent-4" id="result"></span>
+        <input type="email" class="form-control" id="emailUserName"  onblur= "checkExist()"value = "" placeholder="Enter username (your email)" name="userNameEmail" required><span id="result"></span>
       </div>
 
       </div>
@@ -108,7 +106,7 @@ input[type=submit] {
       <div class="col">
        
           <i class="fas fa-lock prefix"></i>
-             <input type="password" id= "pswd" placeholder="Enter password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+             <input type="password" id= "pswd"  placeholder="Enter password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
               title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"required>
         </div>
       </div>
@@ -116,17 +114,17 @@ input[type=submit] {
       <div class="col">
        
           <i class="fas fa-lock prefix"></i>
-             <input type="password" id= "pswd2" placeholder="Please Re-enter password" name="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+             <input type="password" id= "pswd2"   placeholder="Please Re-enter password" name="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"required>
 
         </div>
       </div>
    
-    <button type="submit" class="btn btn-primary mt-3" style="background: gray; border: solid gray" onclick="ajaxCall();">Register</button> &nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary mt-3" style="background: gray; border: solid gray" onclick="return Validate()">Register</button> &nbsp;&nbsp;&nbsp;&nbsp;
     <button type= "reset" class="btn btn-primary mt-3" style="border: solid rgb(39,122,245)" >Reset</button>&nbsp;&nbsp;&nbsp;&nbsp;
    <a href= "home"><button type= "button" class="btn btn-primary mt-3" style="background: red; border: solid red" >Cancel</button></a>
      </form>
-     
+     <div>Meant to <a href = "loginRM"> Login</a>?</div>
 </div>
    <div id="message">
   <h3>Password must contain the following:</h3>
@@ -196,40 +194,51 @@ myInput.onkeyup = function() {
     length.classList.remove("valid");
     length.classList.add("invalid");
   }
-  function validatePassword() {
-	  if(pswd.value !== pswd2.value) {
-		  pswd2.setCustomValidity("Passwords Don't Match");
-	  }else {
-		  pswd2.setCustomValidity(' ');
-	  }
-	  pswd.onchange = validatePassword;
-	  pswd2.onchange = validatePassword;
-  }
-  
+
 }
 </script>
-<!-- <script> 
-// function checkExist(){
-//     var xmlhttp = new XMLHttpRequest();
-//     var username = document.forms["regform"]["userNameEmail"].value ;
-//     var url = "usernameexist.jspusername=?" + username;
-//     xmlhttp.onreadystatechange = function(){
-//         if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-//             if(xmlhttp.responseText == "\n\n\n\n\nUser already exists")
-//                 document.getElementById("result").style.color = "red";
-//             else
-//                 document.getElementById("result").style.color = "green";
-//             document.getElementById("result").innerHTML = xmlhttp.responseText;
-//         }
+<script type="text/javascript">
+    function Validate() {
+        var password = document.getElementById("pswd").value;
+        var confirmPassword = document.getElementById("pswd2").value;
+        if (password != confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+</script>
+<script>
+ function checkExist(){
+    var xmlhttp = new XMLHttpRequest();
+  var username = document.forms["regform"]["userNameEmail"].value;
+  var url = "usernameexist.jsp" + username;
+ xmlhttp.onreadystatechange = function(){
+   if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
+     if(xmlhttp.responseText == "\n\n\n\n\nUser already exists")
+      document.getElementById("result").style.color = "red";
+  else
+      document.getElementById("result").style.color = "green";
+   document.getElementById("result").innerHTML = xmlhttp.responseText;
+ }
         
-//     };
-//     try{
-//     xmlhttp.open("post",url,true);
-//     xmlhttp.send();
-// }catch(e){alert("unable to connect to server");
-// }
-// }
- -->
+  };
+    try{
+   xmlhttp.open("POST",url,true);
+  xmlhttp.send(null);
+ }catch(e){alert("unable to connect to server");
+}
+ }
+</script> 
+
+<!-- <script>
+function userNameTaken() {
+  alert("Sorry that user name is taken \n please try again");
+}
+</script> -->
+<!-- // /*   pswd.onchange = validatePassword;
+//   pswd2.onchange = validatePassword;
+//  */ -->
 
 
 <br><br><br><br><br><br><br><br><br>

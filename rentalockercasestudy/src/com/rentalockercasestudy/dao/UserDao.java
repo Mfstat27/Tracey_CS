@@ -1,7 +1,11 @@
 package com.rentalockercasestudy.dao;
 
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.persistence.EntityManager;
-
+import java.sql.DriverManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
@@ -20,14 +24,11 @@ public class UserDao implements UserDaoI {
 	@Override
 	public int addUser(User newUser)  {
 		int result = 0;
-		
-		
 		EntityManagerFactory emf = null;
 		EntityManager em = null;
 		try {
 		emf = Persistence.createEntityManagerFactory(persistenceUnitName);
 		em = emf.createEntityManager();	
-		
 		em.getTransaction().begin();
 		em.persist(newUser);
 		em.getTransaction().commit();
@@ -118,26 +119,56 @@ public class UserDao implements UserDaoI {
 		return foundUserEmail;
 	}		
 	
-	public int getUserByUsernameAndPassword(User userLogin) {
-		UserDao ud = new UserDao();
-		int result = 0;
+//	public int getUserByUsernameAndPassword(User userLogin) {
+//		UserDao ud = new UserDao();
+//		int result = 0;
+//		
+//		EntityManagerFactory emf= Persistence.createEntityManagerFactory(persistenceUnitName);
+//		EntityManager em = emf.createEntityManager();
+//		 try {
+//		Query query = em.createQuery("select u from User u where u.userNameEmail = :givenUserName");
+//		query.setParameter("givenUserName", userLogin.getUserNameEmail());
+//		User ul = (User)query.getSingleResult();
+//		System.out.println(ul);
+//		boolean checkpword = ud.decodePassword(userLogin.getPassword(), ul.getPassword());
+//		if(ul != null && checkpword) {
+//			result = 1;
+//		
+//		}else if(ul != null && !checkpword) {
+//			result = 2;
+//			
+//		} else {
+//			result = 0;
+//		}
+//		//em.find(UserLogin.class, password);
+//		 }catch(NoResultException n) {
+//			
+//		 }finally {
+//	
+//		em.close();
+//		emf.close();
+//		 }
+//		return result;
+//	}
 	
+	public User getUserByUsernameAndPassword(User userLogin) {
+		UserDao ud = new UserDao();
+		User foundUser = null;
+		User user = null;
 		EntityManagerFactory emf= Persistence.createEntityManagerFactory(persistenceUnitName);
 		EntityManager em = emf.createEntityManager();
 		 try {
-		Query query = em.createQuery("select u from User u where u.userNameEmail = :givenUserName");
+			//foundUser = em.find(User.class, userLogin.getUserNameEmail());
+		Query query = em.createQuery("select u from User u where u.userNameEmail = :givenUserName and u.firstName = :givenFirstName");
 		query.setParameter("givenUserName", userLogin.getUserNameEmail());
-		User ul = (User)query.getSingleResult();
-		System.out.println(ul);
-		boolean checkpword = ud.decodePassword(userLogin.getPassword(), ul.getPassword());
-		if(ul != null && checkpword) {
-			result = 1;
-		
-		}else if(ul != null && !checkpword) {
-			result = 2;
-			
-		} else {
-			result = 0;
+		query.setParameter("givenFirstName", userLogin.getFirstName());
+		foundUser = (User)query.getSingleResult();
+		System.out.println(foundUser);
+		boolean checkpword = ud.decodePassword(userLogin.getPassword(), foundUser.getPassword());
+		if(foundUser != null && checkpword) {
+			System.out.println("Login success");
+		}else {
+			System.out.println("Login error");
 		}
 		//em.find(UserLogin.class, password);
 		 }catch(NoResultException n) {
@@ -147,15 +178,43 @@ public class UserDao implements UserDaoI {
 		em.close();
 		emf.close();
 		 }
-		return result;
+		return foundUser;
 	}
+
+	
+//    public User checkLogin(String email, String password) throws SQLException,
+//            ClassNotFoundException {
+//        
+//        UserDao ud = new UserDao();
+//        
+//        Class.forName("com.mysql.jdbc.Driver");
+//        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/RentaLockerCaseStudy", "root",  "ZAHIRA11");
+//        String sql = "SELECT * FROM user WHERE email = ? and password = ?";
+//        PreparedStatement statement = connection.prepareStatement(sql);
+//        statement.setString(1, email);
+//        statement.setString(2, password);
+//        ResultSet result = statement.executeQuery();
+//        boolean checkpw = ud.decodePassword(password, result.getString("password"));
+//        User user = null;
+// 
+//        if (result.next()&&checkpw) {
+//            user = new User();
+//            user.setFirstName(result.getString("firstName"));
+//            user.setUserNameEmail(email);
+//        }
+// 
+//        connection.close();
+// 
+//        return user;
+//    }
+	
 	
 	public static String encodePassword(String password) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(password);
 		return encodedPassword;
 	}
-	
+
 	public boolean decodePassword(String password, String encodedPassword) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		boolean isPasswordMatch = passwordEncoder.matches(password, encodedPassword);
