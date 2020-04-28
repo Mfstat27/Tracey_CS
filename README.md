@@ -1,2 +1,2 @@
 # Tracey_CS
-Includes all code (Java,HTML&amp;CSS,SQL etc.)
+Includes all code (Java,HTML&CSS,SQL,Spring MVC,JUnit,Maven)
